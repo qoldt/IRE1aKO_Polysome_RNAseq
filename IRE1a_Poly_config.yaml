@@ -1,0 +1,96 @@
+---
+samples:
+  PE:
+    WT_poly_1:
+      name: 2720_S5
+    WT_poly_2:
+      name: 2721_S6
+    WT_poly_3.1:
+      name: WT2.1-Polysome
+    WT_poly_3.2:
+      name: WT2.2-Polysome
+    WT_poly_4.1:
+      name: WT3.1-Polysome
+    WT_poly_4.2:
+      name: WT3.2-Polysome
+    IRE1aKO_poly_1:
+      name: 2722_S7
+    IRE1aKO_poly_2:
+      name: 2723_S8
+    IRE1aKO_poly_3.1:
+      name: KO1.1-Polysome
+    IRE1aKO_poly_3.2:
+      name: KO1.2-Polysome
+    IRE1aKO_poly_4.1:
+      name: KO2.1-Polysome
+    IRE1aKO_poly_4.2:
+      name: KO2.2-Polysome
+    IRE1aKO_poly_5.1:
+      name: KO3.1-Polysome
+    IRE1aKO_poly_5.2:
+      name: KO3.2-Polysome
+    WT_poly_light_1.1:
+      name: 01_WT2-light_S17
+    WT_poly_light_1.2:
+      name: 11_WT2-light_S27
+    WT_poly_light_2.1:
+      name: 03_WT3-light_S19
+    WT_poly_light_2.2:
+      name: 13_WT3-light_S29
+    IRE1aKO_poly_light_1.1:
+      name: 05_KO1-light_S21
+    IRE1aKO_poly_light_1.2:
+      name: 15_KO1-light_S31
+    IRE1aKO_poly_light_2.1:
+      name: 07_KO2-light_S23
+    IRE1aKO_poly_light_2.2:
+      name: 17_KO2-light_S33
+    IRE1aKO_poly_light_3.1:
+      name: 09_KO3-light_S25
+    IRE1aKO_poly_light_3.2:
+      name: 19_KO3-light_S35
+    WT_poly_heavy_1.1:
+      name: 02_WT2-heavy_S18
+    WT_poly_heavy_1.2:
+      name: 12_WT2-heavy_S28
+    WT_poly_heavy_2.1:
+      name: 04_WT3-heavy_S20
+    WT_poly_heavy_2.2:
+      name: 14_WT3-heavy_S30
+    IRE1aKO_poly_heavy_1.1:
+      name: 06_KO1-heavy_S22
+    IRE1aKO_poly_heavy_1.2:
+      name: 16_KO1-heavy_S32
+    IRE1aKO_poly_heavy_2.1:
+      name: 08_KO2-heavy_S24
+    IRE1aKO_poly_heavy_2.2:
+      name: 18_KO2-heavy_S34
+    IRE1aKO_poly_heavy_3.1:
+      name: 10_KO3-heavy_S26
+    IRE1aKO_poly_heavy_3.2:
+      name: 20_KO3-heavy_S36
+  SE:
+    WT_total_se_1:
+      name: 1528_S5
+    WT_total_se_2:
+      name: 1533_S7
+    WT_total_se_3:
+      name: 1534_S8
+    WT_total_se_4:
+      name: 1529_S6
+    IRE1aKO_total_se_1:
+      name: 1523_S1
+    IRE1aKO_total_se_2:
+      name: 1524_S2
+    IRE1aKO_total_se_3:
+      name: 1525_S3
+    IRE1aKO_total_se_4:
+      name: 1526_S4
+genomedir: "/fast/users/newmana_c/work/genomes/GRCm39"
+star_index: "/fast/users/newmana_c/work/genomes/GRCm39"
+TE_gtf_file: "/fast/users/newmana_c/work/genomes/GRCm39/GRCm39_Ensembl_rmsk_TE.gtf"
+gene_gtf_file: "/fast/users/newmana_c/work/genomes/GRCm39/Mus_musculus.GRCm39.109.chr.gtf"
+gene_gff_file: "/fast/users/newmana_c/work/genomes/GRCm39/gencode.vM31.primary_assembly.basic.annotation_prepared.gff"
+workdir: "/fast/users/newmana_c/work/output/IRE1aPoly"
+download_dir: "/fast/users/scratch/P1757"
+
