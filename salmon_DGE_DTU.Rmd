@@ -26,7 +26,7 @@ library(rnaseqDTU)
 
 ###  METADATA
 ```{r metadata}
-# Create metadata
+# Create metadata # WT_total_se_4 and IRE1aKO_total_se_3 are outliers and removed
 metadata = data.frame(
   sample_id = c("IRE1aKO_poly_1", "IRE1aKO_poly_2", # IRE1aKO first polysome samples (batch 2)
                 "IRE1aKO_poly_3.1", "IRE1aKO_poly_3.2", # IRE1aKO polysome heavy & light merged , sample 1, technical replicates 1 & 2 (batch 3)
@@ -38,7 +38,7 @@ metadata = data.frame(
                 "IRE1aKO_poly_light_1.1" ,"IRE1aKO_poly_light_1.2" , # IRE1aKO polysome light sample 1, technical replicates 1 & 2 (batch 3)
                 "IRE1aKO_poly_light_2.1" ,"IRE1aKO_poly_light_2.2" , # IRE1aKO polysome light sample 2, technical replicates 1 & 2 (batch 3)
                 "IRE1aKO_poly_light_3.1", "IRE1aKO_poly_light_3.2", # IRE1aKO polysome light sample 3, technical replicates 1 & 2 (batch 3)
-                "IRE1aKO_total_se_1","IRE1aKO_total_se_2","IRE1aKO_total_se_3","IRE1aKO_total_se_4", # IRE1aKO original single end RNAseq (batch 1)
+                "IRE1aKO_total_se_1","IRE1aKO_total_se_2","IRE1aKO_total_se_3", "IRE1aKO_total_se_4", # IRE1aKO original single end RNAseq (batch 1)
                 "WT_poly_1", "WT_poly_2", # WT first polysome samples (batch 2)
                 "WT_poly_3.1",  "WT_poly_3.2",  # WT polysome heavy & light merged , sample 1, technical replicates 1 & 2 (batch 3)
                 "WT_poly_4.1",  "WT_poly_4.2",  # WT polysome heavy & light merged , sample 2, technical replicates 1 & 2 (batch 3)
@@ -47,6 +47,26 @@ metadata = data.frame(
                 "WT_poly_light_1.1",  "WT_poly_light_1.2", # WT polysome light sample 1, technical replicates 1 & 2 (batch 3)
                 "WT_poly_light_2.1",  "WT_poly_light_2.2", # WT polysome light sample 2, technical replicates 1 & 2 (batch 3)
                 "WT_total_se_1", "WT_total_se_2","WT_total_se_3","WT_total_se_4" # WT original single end RNAseq (batch 1)
+  ),
+  sample = c("IRE1aKO_poly_1", "IRE1aKO_poly_2", # IRE1aKO first polysome samples (batch 2)
+                "IRE1aKO_poly_3", "IRE1aKO_poly_3", # IRE1aKO polysome heavy & light merged , sample 1, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_4", "IRE1aKO_poly_4", # IRE1aKO polysome heavy & light merged , sample 2 technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_5", "IRE1aKO_poly_5", # IRE1aKO polysome heavy & light merged , sample 3 technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_heavy_1", "IRE1aKO_poly_heavy_1", # IRE1aKO polysome heavy sample 1, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_heavy_2", "IRE1aKO_poly_heavy_2", # IRE1aKO polysome heavy sample 2, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_heavy_3", "IRE1aKO_poly_heavy_3", # IRE1aKO polysome heavy sample 3, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_light_1" ,"IRE1aKO_poly_light_1" , # IRE1aKO polysome light sample 1, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_light_2" ,"IRE1aKO_poly_light_2" , # IRE1aKO polysome light sample 2, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_poly_light_3", "IRE1aKO_poly_light_3", # IRE1aKO polysome light sample 3, technical replicates 1 & 2 (batch 3)
+                "IRE1aKO_total_se_1","IRE1aKO_total_se_2","IRE1aKO_total_se_3", "IRE1aKO_total_se_4", # IRE1aKO original single end RNAseq (batch 1)
+                "WT_poly_1", "WT_poly_2", # WT first polysome samples (batch 2)
+                "WT_poly_3",  "WT_poly_3",  # WT polysome heavy & light merged , sample 1, technical replicates 1 & 2 (batch 3)
+                "WT_poly_4",  "WT_poly_4",  # WT polysome heavy & light merged , sample 2, technical replicates 1 & 2 (batch 3)
+                "WT_poly_heavy_1",  "WT_poly_heavy_1",  # WT polysome heavy sample 1, technical replicates 1 & 2 (batch 3)
+                "WT_poly_heavy_2",  "WT_poly_heavy_2",  # WT polysome heavy sample 2, technical replicates 1 & 2 (batch 3)
+                "WT_poly_light_1",  "WT_poly_light_1", # WT polysome light sample 1, technical replicates 1 & 2 (batch 3)
+                "WT_poly_light_2",  "WT_poly_light_2", # WT polysome light sample 2, technical replicates 1 & 2 (batch 3)
+                "WT_total_se_1", "WT_total_se_2","WT_total_se_3" ,"WT_total_se_4" # WT original single end RNAseq (batch 1)
   ),
   condition = c(rep("IRE1aKO.polysome",8),
                 rep("IRE1aKO.heavy", 6), 
@@ -68,7 +88,15 @@ metadata = data.frame(
             rep("b3", 4), # WT polysome heavy & light merged (batch 3)
             rep("b3", 8), # WT polysome heavy & light individual (batch 3)
             rep("b1", 4) # WToriginal single end RNAseq
-  )
+  ),
+  technical_replicate = c("1","1","1","2","1","2","1","2", #  IRE1aKO Polysomes
+                          "1","2","1","2","1","2", # IRE1aKO polysome heavy
+                          "1","2","1","2","1","2", # IRE1aKO polysome light
+                          "1","1","1","1",# IRE1aKO total se
+                          "1","1","1","2","1","2", # WT polysomes
+                          "1","2","1","2", # WT polysomes heavy
+                          "1","2","1","2", # WT polysomes light
+                          "1","1","1","1") # WT total se
 )
 
 # super important for how contrasts work
@@ -93,7 +121,7 @@ library(tximport)
 library(readr)
 
 ### Transcript annotation
-gtf <- "annotations/gencode.vM33.annotation.gtf"
+gtf <- "~/My Drive/Bench/IRE1 Polysome Seq 2022/annotations/gencode.vM33.annotation.gtf"
 
 txdb.filename <- "gencode.vM33.annotation.sqlite"
 
@@ -112,16 +140,12 @@ library(GenomicFeatures)
 txdf <- AnnotationDbi::select(txdb, keys(txdb, "GENEID"), "TXNAME", "GENEID")
 
 
-
-
-
-
 ### Salmon quant files
 files <- file.path("salmon_quant", metadata$sample_id, "quant.sf")
 names(files) <- list.files("salmon_quant")
 
 txi <- tximport(files, type="salmon", txOut=TRUE, ignoreAfterBar = TRUE, # because salmon id has ENSMUST...|ENSMUSG...|genesymbol etc
-      countsFromAbundance="scaledTPM")#,"dtuScaledTPM", tx2gene = txdf) 
+      countsFromAbundance="scaledTPM", importer=read.delim) #,"dtuScaledTPM", tx2gene = txdf) 
 cts <- txi$counts
 cts <- cts[rowSums(cts) > 0,]
 
@@ -132,6 +156,13 @@ counts <- data.frame(gene_id=txdf$GENEID,
                      feature_id=txdf$TXNAME,
                      cts)
 
+
+
+########## Remove outliers from Counts & Metadata #########
+drops <- c("IRE1aKO_total_se_3","WT_total_se_4")
+counts <- counts[ , -which(names(counts) %in% drops) ]
+metadata <- metadata[ !metadata$sample_id %in% drops , ]
+
 counts$gene_id <- gsub(counts$gene_id, pattern="\\.[0-9]+$", replacement="") #remove suffixes so we can query biomart
 # Lets annotate gene symbol so its included 
 # Get mart
@@ -139,7 +170,7 @@ library(biomaRt)
 ensembl <- useMart("ensembl", dataset = "mmusculus_gene_ensembl")
 
 # Fetch gene symbols
-genes <- getBM(attributes = c('ensembl_gene_id', 'external_gene_name'), 
+genes <- getBM(attributes = c('ensembl_gene_id', 'external_gene_name', 'gene_biotype'), 
                filters = 'ensembl_gene_id', 
                values = unique(counts$gene_id), 
                mart = ensembl)
@@ -151,81 +182,106 @@ counts <- merge(x = counts, y = genes,
                  all.x = TRUE)
 library(dplyr)
 
-counts$ensembl_gene_id <- counts$gene_id
+
+counts$ensembl_gene_id <- counts$gene_id 
 counts$gene_id <- counts$external_gene_name
+counts <- counts %>% dplyr::select(gene_id, feature_id, ensembl_gene_id, external_gene_name, gene_biotype, everything())
+
+
+###############################################################################################################
+
+# Subset to protein coding genes only, (we want to look at splicing, it doesn't make sense to include lncRNA, we only lose power)
+counts <- subset(counts, gene_biotype =="protein_coding")
+
+###############################################################################################################
+#Manually collapse technical replicates ### should be functionalized later
+# Counts are TPM, and technical replicates normally have minor variation and show poison, and should thus be averaged
+
+counts$IRE1aKO_poly_3 <- (counts$IRE1aKO_poly_3.1 + counts$IRE1aKO_poly_3.2 ) /2
+counts$IRE1aKO_poly_4 <- (counts$IRE1aKO_poly_4.1 + counts$IRE1aKO_poly_4.2 ) /2
+counts$IRE1aKO_poly_5 <- (counts$IRE1aKO_poly_5.1 + counts$IRE1aKO_poly_5.2 ) /2
+
+counts$IRE1aKO_poly_heavy_1 <- (counts$IRE1aKO_poly_heavy_1.1 + counts$IRE1aKO_poly_heavy_1.2 ) /2
+counts$IRE1aKO_poly_heavy_2 <- (counts$IRE1aKO_poly_heavy_2.1 + counts$IRE1aKO_poly_heavy_2.2 ) /2
+counts$IRE1aKO_poly_heavy_3 <- (counts$IRE1aKO_poly_heavy_3.1 + counts$IRE1aKO_poly_heavy_3.2 ) /2
+
+counts$IRE1aKO_poly_light_1 <- (counts$IRE1aKO_poly_light_1.1 + counts$IRE1aKO_poly_light_1.2 ) /2
+counts$IRE1aKO_poly_light_2 <- (counts$IRE1aKO_poly_light_2.1 + counts$IRE1aKO_poly_light_2.2 ) /2
+counts$IRE1aKO_poly_light_3 <- (counts$IRE1aKO_poly_light_3.1 + counts$IRE1aKO_poly_light_3.2 ) /2
+
+counts$WT_poly_3 <- (counts$WT_poly_3.1 + counts$WT_poly_3.2 ) /2
+counts$WT_poly_4 <- (counts$WT_poly_4.1 + counts$WT_poly_4.2 ) /2
+
+counts$WT_poly_heavy_1 <- (counts$WT_poly_heavy_1.1 + counts$WT_poly_heavy_1.2 ) /2
+counts$WT_poly_heavy_2 <- (counts$WT_poly_heavy_2.1 + counts$WT_poly_heavy_2.2 ) /2
+
+counts$WT_poly_light_1 <- (counts$WT_poly_light_1.1 + counts$WT_poly_light_1.2 ) /2
+counts$WT_poly_light_2 <- (counts$WT_poly_light_2.1 + counts$WT_poly_light_2.2 ) /2
+
+# Remove original columns ending in .1 or .2
+counts <- counts[ , -grep("\\.1$|\\.2$", names(counts))]
+# reorder names
+counts <- counts[, order(names(counts))]
+# move gene cols to beginning again
 counts <- counts %>% dplyr::select(gene_id, feature_id, ensembl_gene_id, external_gene_name, everything())
+
+###############################################################################################################
+
+# make a collapsed metadata 
+metadata.original <- metadata
+metadata <- metadata[metadata$technical_replicate =="1",]
+metadata$sample_id <- metadata$sample 
 
 
 ```
 
+
+
 Total RNAseq was single end and  Polysome fraction was paired end in different batches so it doesn't make sense to analyse them together. We are now going to split the counts and metadata by experiment so that they can be analysed as separate objects. Statistically its also better to just use whole polysome rather than using light and heavy fractions which only have two replicates.
 
 ```{r split}
-####### Split off metadata & counts from total RNA seq experiment
+####### Split off metadata & counts from total RNA seq experiment ###############
 # Metadata, IRE1aKO_total_se_3 and WT_total_se_4 appear to be outliers, have much higher seq depth
-metadata.se <- metadata[metadata$sample_id %in% c("IRE1aKO_total_se_1",#"IRE1aKO_total_se_2",
-                                                  "IRE1aKO_total_se_3",
-                                                  "IRE1aKO_total_se_4","WT_total_se_1", "WT_total_se_2",#"WT_total_se_3",
-                                                  "WT_total_se_4"),]
+metadata.se <- metadata[metadata$fraction == "Total",]
 rownames(metadata.se) <- metadata.se$sample_id
 #need to reset levels for condition, though we will only be using the genotype variable for testing
 metadata.se$condition <- factor(metadata.se$condition, levels = c("WT.total","IRE1aKO.total"))
-
 # Counts
-counts.se <- counts[,c("gene_id","feature_id","external_gene_name","ensembl_gene_id",
-                       "IRE1aKO_total_se_1",#"IRE1aKO_total_se_2",
-                       "IRE1aKO_total_se_3",
-                       "IRE1aKO_total_se_4",
-                       "WT_total_se_1","WT_total_se_2",#"WT_total_se_3",
-                       "WT_total_se_4")]
+counts.se <- counts[, c("gene_id","feature_id","external_gene_name","ensembl_gene_id",rownames(metadata.se) ) ]
 
-######### Split off metadata & counts from Polysome RNA seq experiments
+
+
+
+######### Split off metadata & counts from Polysome RNA seq experiments #########
 # Metadata
-metadata.poly <- metadata[metadata$sample_id %in% c(
-  #"IRE1aKO_poly_1", "IRE1aKO_poly_2", # first polysome samples (batch 2)
-                "IRE1aKO_poly_3.1", "IRE1aKO_poly_3.2", "IRE1aKO_poly_4.1","IRE1aKO_poly_4.2","IRE1aKO_poly_5.1","IRE1aKO_poly_5.2",  # second polysome samples (Batch 3)
-               # "WT_poly_1", "WT_poly_2", # first polysome samples (batch 2)
-                "WT_poly_3.1",  "WT_poly_3.2", "WT_poly_4.1","WT_poly_4.2"  # second polysome samples (Batch 3)
-                ),]
+metadata.poly <- metadata[metadata$fraction == "Polysome" ,]
 rownames(metadata.poly) <- metadata.poly$sample_id
 #need to reset levels for condition, though we will only be using the genotype variable for testing
 metadata.poly$condition <- factor(metadata.poly$condition, levels = c("WT.polysome", "IRE1aKO.polysome"))
 
 # Counts
-counts.poly <- counts[,c("gene_id","feature_id","external_gene_name","ensembl_gene_id",
-                         #"IRE1aKO_poly_1", "IRE1aKO_poly_2", # first polysome samples (batch 2)
-                "IRE1aKO_poly_3.1", "IRE1aKO_poly_3.2","IRE1aKO_poly_4.1", "IRE1aKO_poly_4.2","IRE1aKO_poly_5.1", "IRE1aKO_poly_5.2", # second polysome samples (Batch 3)
-               # "WT_poly_1", "WT_poly_2", # first polysome samples (batch 2)
-                "WT_poly_3.1", "WT_poly_3.2","WT_poly_4.1", "WT_poly_4.2"  # second polysome samples (Batch 3)
-                )]
+counts.poly <- counts[, c("gene_id","feature_id","external_gene_name","ensembl_gene_id",rownames(metadata.poly) ) ]
+
 
 ######### Split off metadata & counts from Polysome Heavy fraction RNA seq experiments
 # Metadata
-metadata.heavy <- metadata[metadata$sample_id %in% c("IRE1aKO_poly_heavy_1.1", "IRE1aKO_poly_heavy_1.2", "IRE1aKO_poly_heavy_2.1","IRE1aKO_poly_heavy_2.2","IRE1aKO_poly_heavy_3.1","IRE1aKO_poly_heavy_3.2",
-                "WT_poly_heavy_1.1",  "WT_poly_heavy_1.2", "WT_poly_heavy_2.1","WT_poly_heavy_2.2"  # second polysome samples (Batch 3)
-                ),]
+metadata.heavy <- metadata[metadata$fraction == "Polysome.heavy",]
 rownames(metadata.heavy) <- metadata.heavy$sample_id
 #need to reset levels for condition, though we will only be using the genotype variable for testing
 metadata.heavy$condition <- factor(metadata.heavy$condition, levels = c("WT.heavy", "IRE1aKO.heavy"))
-
 # Counts
-counts.heavy <- counts[,c("gene_id","feature_id","external_gene_name","ensembl_gene_id","IRE1aKO_poly_heavy_1.1", "IRE1aKO_poly_heavy_1.2", "IRE1aKO_poly_heavy_2.1","IRE1aKO_poly_heavy_2.2","IRE1aKO_poly_heavy_3.1","IRE1aKO_poly_heavy_3.2",
-                "WT_poly_heavy_1.1",  "WT_poly_heavy_1.2", "WT_poly_heavy_2.1","WT_poly_heavy_2.2" 
-                )]
+counts.heavy <- counts[,c("gene_id","feature_id","external_gene_name","ensembl_gene_id",rownames(metadata.heavy) ) ]
+
 
 ######### Split off metadata & counts from Polysome light fraction RNA seq experiments
 # Metadata
-metadata.light <- metadata[metadata$sample_id %in% c("IRE1aKO_poly_light_1.1", "IRE1aKO_poly_light_1.2", "IRE1aKO_poly_light_2.1","IRE1aKO_poly_light_2.2","IRE1aKO_poly_light_3.1","IRE1aKO_poly_light_3.2",
-                "WT_poly_light_1.1",  "WT_poly_light_1.2", "WT_poly_light_2.1","WT_poly_light_2.2"  # second polysome samples (Batch 3)
-                ),]
+metadata.light <- metadata[metadata$fraction == "Polysome.light",]
 rownames(metadata.light) <- metadata.light$sample_id
 #need to reset levels for condition, though we will only be using the genotype variable for testing
 metadata.light$condition <- factor(metadata.light$condition, levels = c("WT.light", "IRE1aKO.light"))
-
 # Counts
-counts.light <- counts[,c("gene_id","feature_id","external_gene_name","ensembl_gene_id","IRE1aKO_poly_light_1.1", "IRE1aKO_poly_light_1.2", "IRE1aKO_poly_light_2.1","IRE1aKO_poly_light_2.2","IRE1aKO_poly_light_3.1","IRE1aKO_poly_light_3.2",
-                "WT_poly_light_1.1",  "WT_poly_light_1.2", "WT_poly_light_2.1","WT_poly_light_2.2" 
-                )]
+counts.light <- counts[,c("gene_id","feature_id","external_gene_name","ensembl_gene_id",rownames(metadata.light) ) ]
+
 
 plotMDS(counts[,5:length(counts)])
 plotMDS(counts.se[,5:length(counts.se)])
@@ -247,7 +303,7 @@ d.se
 
 # Filter the data to remove lowly expressed transcripts 
 # n should be number of samples, n.small, the smallest group
-n <- 6
+n <- length(counts.se) - 4
 n.small <- 3
 d.se <- dmFilter(d.se,
               min_samps_feature_expr=n.small, min_feature_expr=10,
@@ -262,12 +318,13 @@ d.se
 table(table(counts(d.se)$gene_id))
 
 ###### POLYSOME DRIMSEQ OBJECT
+
 d.poly <- dmDSdata(counts=counts.poly, samples=metadata.poly) # d is the imaginative name for our Drimseq oject
-d.poly
+d.poly 
 
 # Filter the data to remove lowly expressed transcripts 
 # n should be number of samples, n.small, the smallest group
-n <- 10
+n <- length(counts.poly) - 4
 n.small <- 4
 d.poly <- dmFilter(d.poly,
               min_samps_feature_expr=n.small, min_feature_expr=10,
@@ -287,7 +344,7 @@ d.heavy
 
 # Filter the data to remove lowly expressed transcripts 
 # n should be number of samples, n.small, the smallest group
-n <- 10
+n <- length(counts.heavy) -4
 n.small <- 4
 d.heavy <- dmFilter(d.heavy,
               min_samps_feature_expr=n.small, min_feature_expr=10,
@@ -307,7 +364,7 @@ d.light
 
 # Filter the data to remove lowly expressed transcripts 
 # n should be number of samples, n.small, the smallest group
-n <- 10
+n <- length(counts.light) - 4
 n.small <- 4
 d.light <- dmFilter(d.light,
               min_samps_feature_expr=n.small, min_feature_expr=10,
@@ -339,7 +396,7 @@ d.se <- dmFit(d.se, design=design_full.se)
 d.se <- dmTest(d.se, coef="genotypeIRE1aKO")
 
 # For Polysome RNAseq
-design_full.poly <- model.matrix(~genotype, data=DRIMSeq::samples(d.poly))
+design_full.poly <- model.matrix(~batch + genotype, data=DRIMSeq::samples(d.poly))
 colnames(design_full.poly)
 d.poly <- dmPrecision(d.poly, design=design_full.poly, BPPARAM = BPPARAM)
 d.poly <- dmFit(d.poly, design=design_full.poly)
@@ -531,7 +588,7 @@ top_gene_id <- "Ern1"
 plotProportions(d.poly, gene_id = top_gene_id, "genotype", plot_type= "boxplot2")
 
 
-
+save.image(file = "IRE1aDRIMseqDTU.Rdata")
 ```
 
 
@@ -560,12 +617,12 @@ sample.data.poly <- DRIMSeq::samples(d.poly)
 count.data.poly <- round(as.matrix(counts(d.poly)[,-c(1:2)]))
 dxd.poly <- DEXSeqDataSet(countData=count.data.poly,
                        sampleData=sample.data.poly,
-                       design=~sample + exon + genotype:exon,
+                       design=~sample + batch + exon + genotype:exon,
                        featureID=counts(d.poly)$feature_id,
                        groupID=counts(d.poly)$gene_id)
 dxd.poly <- estimateSizeFactors(dxd.poly)
 dxd.poly <- estimateDispersions(dxd.poly, quiet=TRUE, BPPARAM = BPPARAM)
-dxd.poly <- testForDEU(dxd.poly, reducedModel=~sample + exon , BPPARAM = BPPARAM)
+dxd.poly <- testForDEU(dxd.poly, reducedModel=~sample + batch + exon , BPPARAM = BPPARAM)
 dxr.poly <- DEXSeqResults(dxd.poly, independentFiltering=FALSE)
 qval.poly <- perGeneQValue(dxr.poly)
 dxr.g.poly <- data.frame(gene=names(qval.poly),qval.poly)
@@ -618,29 +675,141 @@ print(paste("In polysome light fraction, found evidence of ", dim(dxr.g.light[dx
 
 
 ```{r DESEQ2_DGE}
+# import with tximport and then convert transcripts to genes, which also calculates an average length per gene
+# First subset files to remove outliers so it matches the filtered metadata, also subset to protein coding
+files.sub <- files[-which(names(files) %in% drops) ]
 
-txi.all <- tximport(files, type="salmon", tx2gene=txdf[,2:1], ignoreAfterBar=TRUE)
+files.poly <- subset(files.sub, names(files) %in% metadata.original[metadata.original$fraction %in% c("Polysome","Polysome.heavy","Polysome.light"),]$sample_id)
 
-dds <- DESeqDataSetFromTximport(txi.all, metadata, ~genotype)
-dds.nobatch <- DESeqDataSetFromTximport(txi.all, metadata, ~genotype)
-dds.se <-  dds.nobatch[,dds.nobatch$condition %in% c("WT.total","IRE1aKO.total")]
-dds.heavy <-  dds.nobatch[,dds.nobatch$condition %in% c("WT.heavy","IRE1aKO.heavy")]
-dds.light <-  dds.nobatch[,dds.nobatch$condition %in% c("WT.light","IRE1aKO.light")]
-dds.poly <-  dds[,dds$condition %in% c("WT.polysome","IRE1aKO.polysome")]
+# from https://rdrr.io/github/bryancquach/omixjutsu/src/R/dge_utils.R
+subset_txi <- function(txi, ids, dimension) {
+  if (!dimension %in% c(1, 2)) {
+    stop("Error: 'dimension' must be '1' (row) or '2' (column)")
+  }
+  index <- ids
+  if (is.factor(index)) {
+    index <- as.character(index)
+  }
+  if (is.character(index)) {
+    if (dimension == 1) {
+      if (sum(rownames(txi$counts) %in% index) != length(index)) {
+        stop("IDs missing from txi object")
+      }
+      index <- match(x = index, table = rownames(txi$counts))
+    } else {
+      if (sum(colnames(txi$counts) %in% index) != length(index)) {
+        stop("IDs missing from txi object")
+      }
+      index <- match(x = index, table = colnames(txi$counts))
+    }
+  }
+  txi_subset <- txi
+  if (dimension == 1) {
+    txi_subset$counts <- txi_subset$counts[index, ]
+    txi_subset$abundance <- txi_subset$abundance[index, ]
+    txi_subset$length <- txi_subset$length[index, ]
+  } else {
+    txi_subset$counts <- txi_subset$counts[, index]
+    txi_subset$abundance <- txi_subset$abundance[, index]
+    txi_subset$length <- txi_subset$length[, index]
+  }
+  return(txi_subset)
+}
+
+
+txi.all <- tximport(files.sub, type="salmon", tx2gene=txdf[,2:1], ignoreAfterBar=TRUE, importer=read.delim, countsFromAbundance = "lengthScaledTPM")
+# trim suffixes so we can subset correctly
+rownames(txi.all$counts) <- sub("\\..*", "", rownames(txi.all$counts))
+
+#######################################################################################################
+# Subset to protein coding genes, using rownames from previously subset counts
+txi.all <- subset_txi(txi.all, ids= unique(counts$ensembl_gene_id), dimension=1)
+#######################################################################################################
+
+
+txi.poly <- tximport(files.poly, type="salmon", tx2gene=txdf[,2:1], ignoreAfterBar=TRUE, importer=read.delim, countsFromAbundance = "lengthScaledTPM")
+# trim suffixes so we can subset correctly
+rownames(txi.poly$counts) <- sub("\\..*", "", rownames(txi.poly$counts))
+
+#######################################################################################################
+
+# Subset to protein coding genes, using rownames from previously subset counts
+txi.poly <- subset_txi(txi.poly, ids= unique(counts$ensembl_gene_id), dimension=1)
+
+#######################################################################################################
+
+# Main dds object with batch included in design
+dds <- DESeqDataSetFromTximport(txi.all, metadata.original, ~batch + genotype, )
+keep <- rowSums(counts(dds) >= 10) >= 3
+dds <- dds[keep,]
+dds <- collapseReplicates(dds, dds$sample, dds$technical_replicate )
+
+# Main dds object from poly with batch and fraction included in design
+dds.poly.all <- DESeqDataSetFromTximport(txi.poly, metadata.original[metadata.original$fraction %in% c("Polysome","Polysome.heavy","Polysome.light"),], ~batch + fraction + genotype)
+keep <- rowSums(counts(dds.poly.all) >= 10) >= 3
+dds.poly.all <- dds.poly.all[keep,]
+dds.poly.all <- collapseReplicates(dds.poly.all, dds.poly.all$sample, dds.poly.all$technical_replicate )
+
+
+# Main dds object with batch ommited from design 
+dds.nobatch <- DESeqDataSetFromTximport(txi.all, metadata.original, ~genotype)
+keep <- rowSums(counts(dds.nobatch) >= 10) >= 3
+dds.nobatch <- dds.nobatch[keep,]
+dds.nobatch <- collapseReplicates(dds.nobatch, dds.nobatch$sample, dds.nobatch$technical_replicate )
+
+# Total RNAseq
+dds.se <- dds.nobatch[,dds.nobatch$fraction == "Total"]
+
+# Polysome
+dds.poly <-  dds[,dds$fraction == "Polysome"]
 dds.poly$batch <- factor(dds.poly$batch, levels = c("b2","b3")) #because batch 1 gets dropped need to fix levels
 
+#Polysome Batch 3 only
+dds.poly.b3 <-  dds.nobatch[,dds.nobatch$batch == "b3" & dds.nobatch$fraction == "Polysome"]
+dds.poly.b3$batch <- factor(dds.poly.b3$batch, levels = c("b3")) #because batch 1 & 2 get dropped need to fix levels
+
+#Polysome Heavy
+dds.heavy <-  dds.nobatch[,dds.nobatch$fraction == "Polysome.heavy"]
+
+#Polysome Light
+dds.light <-  dds.nobatch[,dds.nobatch$fraction == "Polysome.light"]
+
+
 dds <- DESeq(dds, parallel=TRUE)
-dds.se <- DESeq(dds.se, parallel=TRUE)
+dds.se <- DESeq(dds.se, parallel=TRUE,)
+dds.poly.all <- DESeq(dds.poly.all, parallel=TRUE)
 dds.poly <- DESeq(dds.poly, parallel=TRUE)
+dds.poly.b3 <- DESeq(dds.poly.b3, parallel=TRUE)
 dds.heavy <- DESeq(dds.heavy, parallel=TRUE)
 dds.light <- DESeq(dds.light, parallel=TRUE)
 
 
-res.dds <- as.data.frame(DESeq2::results(dds))
-res.dds.se <- as.data.frame(DESeq2::results(dds.se))
-res.dds.poly <- as.data.frame(DESeq2::results(dds.poly))
-res.dds.heavy <- as.data.frame(DESeq2::results(dds.heavy))
-res.dds.light <- as.data.frame(DESeq2::results(dds.light))
+res.dds <- DESeq2::results(dds, name = "genotype_IRE1aKO_vs_WT")
+res.dds.LFC <- lfcShrink(dds, coef="genotype_IRE1aKO_vs_WT", type="apeglm")
+DESeq2::plotMA(res.dds, ylim=c(-2,2)) 
+DESeq2::plotMA(res.dds.LFC, ylim=c(-2,2))
+
+res.dds.se <- DESeq2::results(dds.se, name = "genotype_IRE1aKO_vs_WT")
+DESeq2::plotMA(res.dds.se, ylim=c(-2,2)) 
+res.dds.se.LFC <- lfcShrink(dds.se, coef="genotype_IRE1aKO_vs_WT", type="apeglm")
+DESeq2::plotMA(res.dds.LFC, ylim=c(-2,2))
+
+res.dds.poly.all <- DESeq2::results(dds.poly.all, name = "genotype_IRE1aKO_vs_WT")
+DESeq2::plotMA(res.dds.poly.all, ylim=c(-2,2)) 
+res.dds.poly.all.LFC <- lfcShrink(dds.poly.all, coef="genotype_IRE1aKO_vs_WT", type="apeglm")
+DESeq2::plotMA(res.dds.poly.all.LFC, ylim=c(-2,2))
+
+res.dds.poly <- DESeq2::results(dds.poly, name = "genotype_IRE1aKO_vs_WT")
+DESeq2::plotMA(res.dds.poly, ylim=c(-2,2)) 
+res.dds.poly.LFC <- lfcShrink(dds.poly, coef="genotype_IRE1aKO_vs_WT", type="apeglm")
+DESeq2::plotMA(res.dds.poly.LFC, ylim=c(-2,2))
+
+res.dds.poly.b3 <- DESeq2::results(dds.poly.b3, name = "genotype_IRE1aKO_vs_WT")
+DESeq2::plotMA(res.dds, ylim=c(-2,2))
+DESeq2::plotMA(res.dds.LFC, ylim=c(-2,2))
+
+res.dds.heavy <- DESeq2::results(dds.heavy, name = "genotype_IRE1aKO_vs_WT")
+res.dds.light <- DESeq2::results(dds.light, name = "genotype_IRE1aKO_vs_WT")
 
 
 ```
@@ -672,99 +841,359 @@ addGeneNamesToRes <- function(res) {
 }
 
 
-res.dds <- addGeneNamesToRes(res.dds)
-res.dds.se <- addGeneNamesToRes(res.dds.se)
-res.dds.poly <- addGeneNamesToRes(res.dds.poly)
-res.dds.heavy <- addGeneNamesToRes(res.dds.heavy)
-res.dds.light <- addGeneNamesToRes(res.dds.light)
+res.dds <- addGeneNamesToRes(as.data.frame(res.dds))
+res.dds.se <- addGeneNamesToRes(as.data.frame(res.dds.se))
+res.dds.poly.all <- addGeneNamesToRes(as.data.frame(res.dds.poly.all))
+res.dds.poly <- addGeneNamesToRes(as.data.frame(res.dds.poly))
+res.dds.poly.b3 <- addGeneNamesToRes(as.data.frame(res.dds.poly.b3))
+res.dds.heavy <- addGeneNamesToRes(as.data.frame(res.dds.heavy))
+res.dds.light <- addGeneNamesToRes(as.data.frame(res.dds.light))
 
 
 # extract significant genes from each test
 
-extractSignificantGenes <- function(res, padj_threshold = 0.01) {
-    significant_genes <- res[res$padj < padj_threshold,]
+extractSignificantGenes <- function(res, padj_threshold = 0.05, lfcthreshold = 0.5) {
+    significant_genes <- subset(res, padj < padj_threshold & 
+                                  abs(log2FoldChange) > lfcthreshold 
+                                ) 
+    return(data.frame(ensembl_id = rownames(significant_genes), 
+                      external_gene_name = significant_genes$external_gene_name))
+}
+
+extractSignificantGenesPC <- function(res, padj_threshold = 0.1, lfcthreshold = 0.3) {
+    significant_genes <- subset(res, padj < padj_threshold & 
+                                  abs(log2FoldChange) > lfcthreshold &
+                                  gene_biotype == "protein_coding")
     return(data.frame(ensembl_id = rownames(significant_genes), 
                       external_gene_name = significant_genes$external_gene_name))
 }
 
 
+
+poly.all = extractSignificantGenes(res.dds.poly.all)
+poly.all.pc = extractSignificantGenesPC(res.dds.poly.all)
+
 # This will now generate a list of data frames, with both IDs
-list_significant_genes <- list(
+list_significant_genes <- list( 
   all = extractSignificantGenes(res.dds),
   se = extractSignificantGenes(res.dds.se),
+  poly.all = extractSignificantGenes(res.dds.poly.all),
   poly = extractSignificantGenes(res.dds.poly),
+  poly.b3 = extractSignificantGenes(res.dds.poly.b3),
   heavy = extractSignificantGenes(res.dds.heavy),
   light = extractSignificantGenes(res.dds.light)
 )
 
 
+sig.list <- bind_rows(list_significant_genes) %>% distinct()
+sig.poly.nolightheavy <- bind_rows(list_significant_genes$poly.all)
+sig.poly <- bind_rows(list_significant_genes$poly.all, list_significant_genes$heavy, list_significant_genes$light, list_significant_genes$poly.b3) %>% distinct()
 
 
 
-# Total RNAseq is mostly noise, so lets just look at polysome total and subfractions in heatmap
-dds.heat <-  dds[,dds$fraction %in% c("Polysome")]
-poly = extractSignificantGenes(res.dds.poly)
-#Because we stripped ensembl_id suffixes above, we have to do the same in the dds object to match them
-original_rownames <- rownames(dds.heat) #save them in case needed
-rownames(dds.heat) <- gsub("\\..*", "", rownames(dds.heat))
 
 library(DESeq2)
 library(limma)
 library(ComplexHeatmap)
 
-# Define the function to extract significant genes and their names
-extractSignificantGenes <- function(res, padj_threshold = 0.01) {
-    significant_genes <- res[res$padj < padj_threshold,]
-    return(data.frame(ensembl_id = rownames(significant_genes), 
-                      external_gene_name = significant_genes$external_gene_name))
-}
+```
 
-poly = extractSignificantGenes(res.dds.poly)
-all = extractSignificantGenes(res.dds)
-# Remove rows in poly with NA values
-poly <- poly[complete.cases(poly), ]
-# Remove rows in all with NA values
-all <- all[complete.cases(all), ]
+```{r oneheat}
 
-light = extractSignificantGenes(res.dds.light)
-light <- light[complete.cases(light), ]
+### HEATMAP WITH ALL #####
+dds.heat <-  dds
+
+#Because we stripped ensembl_id suffixes above, we have to do the same in the dds object to match them
+# original_rownames <- rownames(dds.heat) #save them in case needed
+# rownames(dds.heat) <- gsub("\\..*", "", rownames(dds.heat))
 
 # Subset VST-transformed data to only include the significant genes
 vst_data <- assay(vst(dds.heat))
-vst_data <- vst_data[poly$ensembl_id, ]
+vst_data <- vst_data[sig.list$ensembl_id, ]
 
 # Replace the rownames of the matrix with external gene name
-rownames(vst_data) <- poly$external_gene_name
+rownames(vst_data) <- sig.list$external_gene_name
 
-#create subset of metadata without total RNASeq
-metadata_ordered <- metadata[metadata$fraction %in% c("Polysome"),]
+metadata.collapsed <- metadata[metadata$technical_replicate =="1",]
+metadata.collapsed$sample_id <- metadata.collapsed$sample 
 
-metadata_ordered$batch <- factor(metadata_ordered$batch, levels = c("b2","b3")) 
 # Remove batch effect
-vst_nobatch <- removeBatchEffect(vst_data, batch2=metadata_ordered$batch)
-#corrected_data <- vst_data
+vst_nobatch <- removeBatchEffect(vst_data, batch=metadata.collapsed$batch)
 
 # Scale the data
-mat <- t(scale(t(vst_nobatch)))
+mat <- t(scale(t(vst_nobatch), scale = T))
 
 # Ensure the columns in metadata correspond to the columns in the expression data
 col_order <- colnames(mat)
 
-metadata_ordered <- metadata_ordered[match(col_order, metadata_ordered$sample_id), ]
-metadata_ordered <- subset(metadata_ordered, select= -sample_id)
+metadata.collapsed <- metadata.collapsed[match(col_order, metadata.collapsed$sample_id), ]
+metadata.collapsed.trim <- subset(metadata.collapsed, select= -c(sample_id, sample))
 
 # Prepare annotations for the heatmap
-ha = HeatmapAnnotation(df = metadata_ordered)
+ha = HeatmapAnnotation(df = metadata.collapsed.trim)
 
 # Plot the heatmap
 heatmap = Heatmap(
   mat,
   name = "Expression",
   top_annotation = ha,
+  row_names_gp = grid::gpar(fontsize = 5),
   show_row_names = FALSE
 )
 
 draw(heatmap)
+
+```
+
+```{r poly.all.heat}
+
+######## Lets do it without total RNAseq, with collapsed technical replicates, where batch and fraction are included in design and in removeBatchEffect for matrix preparation collapsed technical replicates ###############
+dds.heat.b <-  dds.poly.all
+
+#Because we stripped ensembl_id suffixes above, we have to do the same in the dds object to match them
+original_rownames.b <- rownames(dds.heat.b) #save them in case needed
+rownames(dds.heat.b) <- gsub("\\..*", "", rownames(dds.heat.b))
+
+# Subset VST-transformed data to only include the significant genes
+vst_data.b <- assay(vst(dds.heat.b))
+vst_data.b <- vst_data.b[sig.poly$ensembl_id, ]
+
+# Replace the rownames of the matrix with external gene name
+rownames(vst_data.b) <- sig.poly$external_gene_name
+
+#create subset of metadata without total RNASeq
+metadata_ordered.b <- metadata[metadata$batch %in% c("b2","b3") & metadata$technical_replicate =="1",]
+
+metadata_ordered.b$batch <- factor(metadata_ordered.b$batch, levels = c("b2","b3")) 
+metadata_ordered.b$fraction <- factor(metadata_ordered.b$fraction, levels = c("Polysome","Polysome.heavy","Polysome.light")) 
+metadata_ordered.b$sample_id <- metadata_ordered.b$sample
+
+# Remove fraction effect effect
+vst_nobatch.b <- removeBatchEffect(vst_data.b, batch=metadata_ordered.b$batch)
+
+# Scale the data
+mat.b <- t(scale(t(vst_nobatch.b)))
+
+# Ensure the columns in metadata correspond to the columns in the expression data
+col_order.b <- colnames(mat.b)
+metadata_ordered.b <- metadata_ordered.b[match(col_order.b, metadata_ordered.b$sample_id), ]
+metadata_ordered.b <- subset(metadata_ordered.b, select= -c(sample_id, sample, technical_replicate, condition))
+
+
+
+
+# Prepare annotations for the heatmap
+ha.b = HeatmapAnnotation(df = metadata_ordered.b)
+
+require(circlize)
+require(RColorBrewer)
+require(cluster)
+pamClusters <- cluster::pam(mat.b, k = 4) # pre-select k = 4 centers
+pamClusters$clustering <- paste0('Cluster ', pamClusters$clustering)
+
+# fix order of the clusters to have 1 to 4, top to bottom
+pamClusters$clustering <- factor(pamClusters$clustering, levels = c('Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
+
+myCol <- colorRampPalette(c('dodgerblue', 'black', 'yellow'))(100)
+myBreaks <- seq(-3, 3, length.out = 100)
+
+# 'Step through' gene annotations to only label every 10th row
+genelabels <- rowAnnotation(
+    Genes = anno_mark(
+      at = seq(1, nrow(mat.b), 2),
+      labels = rownames(mat.b)[seq(1, nrow(mat.b), 2)],
+      labels_gp = gpar(fontsize = 8, fontface = 'bold'),
+      padding = 0.5),
+      width = unit(2.0, 'cm') +
+
+      max_text_width(
+        rownames(mat.b)[seq(1, nrow(mat.b), 2)],
+        gp = gpar(fontsize = 15,  fontface = 'bold')))
+
+
+# Plot the heatmap
+heatmap.b = Heatmap(
+  mat.b,
+  #split the genes / rows according to the PAM clusters
+  # split = pamClusters$clustering,
+  # cluster_row_slices = FALSE,
+  name = 'Gene\nZ-\nscore', 
+  col = colorRamp2(myBreaks, myCol),
+  top_annotation = ha.b,
+  # row (gene) parameters
+  cluster_rows = TRUE,
+  show_row_dend = TRUE,
+  #row_title = 'Statistically significant genes',
+  row_title_side = 'left',
+  row_title_gp = gpar(fontsize = 12,  fontface = 'bold'),
+  row_title_rot = 90,
+  row_names_gp = gpar(fontsize = 15, fontface = 'bold'),
+  row_names_side = 'left',
+  row_dend_width = unit(25,'mm'),
+  show_row_names = FALSE,
+  # cluster methods for rows and columns
+  clustering_distance_columns = function(x) as.dist(1 - cor(t(x))),
+  clustering_method_columns = 'ward.D2',
+  clustering_distance_rows = function(x) as.dist(1 - cor(t(x))),
+  clustering_method_rows = 'ward.D2',
+  show_column_names = FALSE,
+)
+
+pdf(file ="~/My Drive/Bench/IRE1 Polysome Seq 2022/plots/test_heatmap.pdf", width = 9, height = 10)
+draw(heatmap.b+genelabels)
+
+```
+
+```{r volcano}
+#Theres a handful of Ensembl ids that are gene duplicates, keep the ones with the highest counts
+o <- order(res.dds.poly.all$baseMean, decreasing=TRUE)
+res.dds.poly.all <- res.dds.poly.all[o,]
+dups <- duplicated(res.dds.poly.all$external_gene_name)
+res.dds.poly.all <- res.dds.poly.all[!dups,]
+
+
+rownames(res.dds.poly.all) <- res.dds.poly.all$external_gene_name
+
+library(EnhancedVolcano)
+lab_italics = paste0("italic('", rownames(res.dds.poly.all), "')") 
+
+
+
+pCutoff = 0.05
+FCcutoff = 2.0
+
+poly.all.volcano <- 
+  EnhancedVolcano(res.dds.poly.all, 
+                  lab = lab_italics, 
+                  #selectLab = selectlabels_italic,
+                  x = 'log2FoldChange', y = 'padj',
+                  xlab = bquote(~Log[2]~ 'fold change'), 
+                  ylab = bquote(~-Log[10]~adjusted~italic(P)),
+                  boxedLabels = TRUE,
+                  parseLabels = TRUE,
+                  pCutoff = pCutoff, 
+                  FCcutoff = FCcutoff, 
+                  pointSize = 1.0, 
+                  labSize = 3.0,
+                  drawConnectors = TRUE,
+                  widthConnectors = 0.5,
+                  title = paste0("Differential Gene Expression in IRE1","\u03B1","KO Polysome RNA"),
+                  subtitle = "...",
+                  caption = paste0('log2 FC cutoff: ', 
+                    FCcutoff, '; p-value cutoff: ', 
+                    pCutoff, '\nTotal = ', 
+                    
+                    nrow(res.dds.poly.all), ' variables')
+                  ) #+ coord_flip()#,
+  #legend=c('NS','Log2 FC','Adjusted p-value', 'Adjusted p-value & Log2 FC'),
+  #legendPosition = 'bottom', legendLabSize = 14, legendIconSize = 5.0)
+
+
+poly.all.volcano
+
+
+
+
+
+
+
+
+
+```
+
+```{r other_heat}
+######## Lets do it with polysomes heavy & light collapsed ###############
+dds.heat.b3 <-  dds[,dds$fraction == "Polysome"]
+
+#Because we stripped ensembl_id suffixes above, we have to do the same in the dds object to match them
+original_rownames.b3 <- rownames(dds.heat.b3) #save them in case needed
+rownames(dds.heat.b3) <- gsub("\\..*", "", rownames(dds.heat.b3))
+
+
+# Subset VST-transformed data to only include the significant genes
+vst_data.b3 <- assay(vst(dds.heat.b3))
+vst_data.b3 <- vst_data.b3[sig.poly.nolightheavy$ensembl_id, ]
+
+# Replace the rownames of the matrix with external gene name
+rownames(vst_data.b3) <- sig.poly.nolightheavy$external_gene_name
+
+#create subset of metadata without total RNASeq
+metadata_ordered.b3 <- metadata[metadata$fraction == "Polysome" & metadata$technical_replicate =="1",]
+
+metadata_ordered.b3$batch <- factor(metadata_ordered.b3$batch, levels = c("b2","b3")) 
+metadata_ordered.b3$sample_id <- metadata_ordered.b3$sample
+
+# Remove fraction effect effect
+vst_nobatch.b3 <- removeBatchEffect(vst_data.b3, batch=metadata_ordered.b3$batch)
+plotMDS(vst_nobatch.b3)
+# Scale the data
+mat.b3 <- t(scale(t(vst_nobatch.b3)))
+
+# Ensure the columns in metadata correspond to the columns in the expression data
+col_order.b3 <- colnames(mat.b3)
+metadata_ordered.b3 <- metadata_ordered.b3[match(col_order.b3, metadata_ordered.b3$sample_id), ]
+metadata_ordered.b3 <- subset(metadata_ordered.b3, select= -c(sample_id, sample))
+
+# Prepare annotations for the heatmap
+ha.b3 = HeatmapAnnotation(df = metadata_ordered.b3)
+
+require(circlize)
+require(RColorBrewer)
+require(cluster)
+pamClusters <- cluster::pam(mat.b3, k = 4) # pre-select k = 4 centers
+pamClusters$clustering <- paste0('Cluster ', pamClusters$clustering)
+
+# fix order of the clusters to have 1 to 4, top to bottom
+pamClusters$clustering <- factor(pamClusters$clustering, levels = c('Cluster 1', 'Cluster 2', 'Cluster 3', 'Cluster 4'))
+
+myCol <- colorRampPalette(c('dodgerblue', 'black', 'yellow'))(100)
+myBreaks <- seq(-3, 3, length.out = 100)
+
+# 'Step through' gene annotations to only label every 10th row
+genelabels <- rowAnnotation(
+    Genes = anno_mark(
+      at = seq(1, nrow(mat.b3), 1),
+      labels = rownames(mat.b3)[seq(1, nrow(mat.b3), 1)],
+      labels_gp = gpar(fontsize = 8, fontface = 'bold'),
+      padding = 0.5),
+      width = unit(2.0, 'cm') +
+
+      max_text_width(
+        rownames(mat.b3)[seq(1, nrow(mat.b3), 1)],
+        gp = gpar(fontsize = 15,  fontface = 'bold')))
+
+
+# Plot the heatmap
+heatmap.b3 = Heatmap(
+  mat.b3,
+  #split the genes / rows according to the PAM clusters
+  # split = pamClusters$clustering,
+  # cluster_row_slices = FALSE,
+  name = 'Gene\nZ-\nscore', 
+  col = colorRamp2(myBreaks, myCol),
+  top_annotation = ha.b3,
+  # row (gene) parameters
+  cluster_rows = TRUE,
+  show_row_dend = TRUE,
+  #row_title = 'Statistically significant genes',
+  row_title_side = 'left',
+  row_title_gp = gpar(fontsize = 12,  fontface = 'bold'),
+  row_title_rot = 90,
+  row_names_gp = gpar(fontsize = 15, fontface = 'bold'),
+  row_names_side = 'left',
+  row_dend_width = unit(25,'mm'),
+  show_row_names = FALSE,
+  # cluster methods for rows and columns
+  clustering_distance_columns = function(x) as.dist(1 - cor(t(x))),
+  clustering_method_columns = 'ward.D2',
+  clustering_distance_rows = function(x) as.dist(1 - cor(t(x))),
+  clustering_method_rows = 'ward.D2',
+  show_column_names = FALSE,
+)
+
+pdf(file ="~/My Drive/Bench/IRE1 Polysome Seq 2022/plots/test_heatmap.pdf", width = 9, height = 10)
+draw(heatmap.b3+genelabels)
+
 
 
 ```
@@ -777,12 +1206,13 @@ library(patchwork)
 res.dds <- res.dds[!is.na(res.dds$padj) & res.dds$padj != 0, ]
 res.dds.se <- res.dds.se[!is.na(res.dds.se$padj) & res.dds.se$padj != 0, ]
 res.dds.poly <- res.dds.poly[!is.na(res.dds.poly$padj) & res.dds.poly$padj != 0, ]
+res.dds.poly.all <- res.dds.poly.all[!is.na(res.dds.poly.all$padj) & res.dds.poly.all$padj != 0 & res.dds.poly.all$gene_biotype == "protein_coding"  , ]
 res.dds.heavy <- res.dds.heavy[!is.na(res.dds.heavy$padj) & res.dds.heavy$padj != 0, ]
 res.dds.light <- res.dds.light[!is.na(res.dds.light$padj) & res.dds.light$padj != 0, ]
 
 
 
-plot_volcano <- function(res, title="", log2fc_threshold=1, padj_threshold=0.05, n_labels=35) {
+plot_volcano <- function(res, title="", log2fc_threshold=0.5, padj_threshold=0.05, n_labels=35) {
     
     # Filter out NA values
     res <- res[!is.na(res$log2FoldChange) & !is.na(res$padj),]
@@ -797,7 +1227,8 @@ plot_volcano <- function(res, title="", log2fc_threshold=1, padj_threshold=0.05,
     res$color[downregulated] <- "red"
     
     # Select top genes by absolute log2FC magnitude
-    top_genes <- res[order(-abs(res$log2FoldChange)),][1:n_labels,]
+    res.sub <- res[res$padj < padj_threshold,]
+    top_genes <- res.sub[order(-abs(res.sub$log2FoldChange)),][1:n_labels,]
     
     max_abs_fc <- max(abs(res$log2FoldChange), na.rm = TRUE) + 0.5  # Adding a bit of padding
     
@@ -820,6 +1251,7 @@ plot_volcano <- function(res, title="", log2fc_threshold=1, padj_threshold=0.05,
 plot_volcano(res.dds, "All Counts")
 plot_volcano(res.dds.se, "Total RNAseq")
 plot_volcano(res.dds.poly, "All Polysomes")
+plot_volcano(res.dds.poly.all, "All Polysomes")
 plot_volcano(res.dds.heavy, "Heavy Polysomes")
 plot_volcano(res.dds.light, "Light Polysomes")
 
