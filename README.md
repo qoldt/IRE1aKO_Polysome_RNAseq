@@ -6,7 +6,7 @@ This is the repository for analysis of bulk RNAseq from P0 mouse cerebral cortex
 - 3. Heavy Polysomes (enrichment for polysomes, selected 'heavy' fraction, followed by RNA extraction and total RNA library with rRNA depletion).
 - 4. light Polysomes (enrichment for polysomes, selected 'light' fraction, followed by RNA extraction and total RNA library with rRNA depletion).
 
-These isolation and their batches are provided in the 'metadata' object described in the main `IRE1aKO_DGE_DTU.rmd` script.
+These isolation and their batches are provided in the 'metadata' object described in the main `Analysis.Rmd` script, which contains all code written for statistical analysis and plotting.
 
 
 # Mapping and Quantification
